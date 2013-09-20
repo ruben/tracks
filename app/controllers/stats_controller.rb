@@ -434,7 +434,7 @@ class StatsController < ApplicationController
     @cut_off_year = 12.months.ago.beginning_of_day
     @cut_off_year_plus3 = 15.months.ago.beginning_of_day
     @cut_off_month = 1.month.ago.beginning_of_day
-    @cut_off_3months = 3.months.ago.beginning_of_day
+    @cutt_off = 3.months.ago.beginning_of_day
   end
 
   def get_stats_actions
@@ -552,16 +552,16 @@ class StatsController < ApplicationController
   end
 
   def get_stats_tags
-    cloud = TagCloud.new(current_user, @cut_off_3months)
+    cloud = TagCloud.new(current_user, @cutt_off)
     cloud.compute
 
-    @tags_for_cloud = cloud.tags_for_cloud
-    @tags_min = cloud.tags_min
-    @tags_divisor = cloud.tags_divisor
+    @tags_for_cloud = cloud.tags
+    @tags_min = cloud.min
+    @tags_divisor = cloud.divisor
 
-    @tags_for_cloud_90days = cloud.tags_for_cloud_90days
-    @tags_min_90days = cloud.tags_min_90days
-    @tags_divisor_90days = cloud.tags_divisor_90days
+    @tags_for_cloud_90days = cloud.tags_90days
+    @tags_min_90days = cloud.min_90days
+    @tags_divisor_90days = cloud.divisor_90days
   end
 
   def get_ids_from (actions, week_from, week_to, at_end)
